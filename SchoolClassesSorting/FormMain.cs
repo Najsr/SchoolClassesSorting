@@ -202,7 +202,6 @@ namespace SchoolClassesSorting
 
         private Soutez LoadSoutez(FileInfo fileInfo)
         {
-            Soutez soutez;
             using (var package = new ExcelPackage(fileInfo))
             {
                 var worksheet = package.Workbook.Worksheets[1];
@@ -212,7 +211,7 @@ namespace SchoolClassesSorting
                     return null;
 
                 var localZaci = new List<Zak>();
-                for (var i = 3; i <= pocetTrid * pocetZakuNaTridu + 3; i++)
+                for (var i = 3; i <= pocetTrid * pocetZakuNaTridu + 3 + pocetTrid * 2; i++)
                 {
                     var id = worksheet.Cells["A" + i].Value;
                     var jmeno = worksheet.Cells["B" + i].Value;
@@ -234,7 +233,7 @@ namespace SchoolClassesSorting
                     }
 
                 }
-                soutez = new Soutez(localZaci, pocetTrid, pocetZakuNaTridu);
+                var soutez = new Soutez(localZaci, pocetTrid, pocetZakuNaTridu);
 
                 return soutez;
             }
